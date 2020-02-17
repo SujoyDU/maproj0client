@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <script src="js/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var lon = 0;
+        var lat = 0;
+        var zoom = 2;
+        var map, l_both;
+        function init(){
+            map = new OpenLayers.Map( 'map' );
+            //change 'zhang' to your login name
+            //http://localhost/cgi-bin/mapserv?map=/var/www/world/maps/static.map&
+            l_both = new OpenLayers.Layer.WMS( "overlay",
+                    "http://localhost/cgi-bin/mapserv?map=/home/sujoy/Desktop/webgis/world/maps/static.map&", {layers: 'world30,cities',format: "image/png"});
+            map.addLayer(l_both);
+            map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+			map.addControl(new OpenLayers.Control.MousePosition({position: new OpenLayers.Pixel(100,0)}));
+            map.addControl( new OpenLayers.Control.LayerSwitcher() );
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">MapServer WMS + OpenLayer Example</h1>
+    <div id="map"></div>
+  </body>
+</html>
+
+
+
+
